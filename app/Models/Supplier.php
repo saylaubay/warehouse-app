@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'phone',
+        'active',
+    ];
+
+    public function inputs()
+    {
+        return $this->hasMany(Input::class);
+    }
+
 }

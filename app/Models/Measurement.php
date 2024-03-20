@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Measurement extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+      'name',
+      'active',
+    ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

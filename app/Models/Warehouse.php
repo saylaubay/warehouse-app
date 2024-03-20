@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Warehouse extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'active',
+    ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function outputs()
+    {
+        return $this->hasMany(Output::class);
+    }
+
+    public function inputs()
+    {
+        return $this->hasMany(Input::class);
+    }
+
+
 }
