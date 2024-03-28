@@ -13,7 +13,7 @@ class OutputController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

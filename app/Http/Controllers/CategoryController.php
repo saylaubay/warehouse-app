@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Repositories\CategoryRepositoryInterface;
+use App\Models\Category;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
 class CategoryController extends Controller
 {
-    public $repository;
+    public $categoryRepository;
 
-    public function __construct(CategoryRepositoryInterface $repository)
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
-        $this->repository = $repository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return $this->repository->getAll();
+        return $this->categoryRepository->getAll();
     }
 
     /**

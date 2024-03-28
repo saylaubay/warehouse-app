@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Measurement;
 use App\Http\Requests\StoreMeasurementRequest;
 use App\Http\Requests\UpdateMeasurementRequest;
+use App\Repositories\Interfaces\MeasurementRepositoryInterface;
 
 class MeasurementController extends Controller
 {
+    protected $measurementRepository;
+
+    public function __construct(MeasurementRepositoryInterface $measurementRepository)
+    {
+        $this->measurementRepository = $measurementRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->measurementRepository->getAll();
     }
 
     /**
