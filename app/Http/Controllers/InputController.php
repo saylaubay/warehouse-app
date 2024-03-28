@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Input;
 use App\Http\Requests\StoreInputRequest;
 use App\Http\Requests\UpdateInputRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class InputController extends Controller
 {
@@ -63,4 +67,24 @@ class InputController extends Controller
     {
         //
     }
+
+    public function getInputByDate(Request $request)
+    {
+        
+        $request->validate([
+            'date'=>'required',
+        ]);
+        $date = $request->date;
+
+
+        $date1 = Carbon::create(substr($date,6,4), substr($date,3,2), substr($date,0,2),0,0,1);
+        $date2 = Carbon::create(substr($date,6,4), substr($date,3,2), substr($date,0,2),23,59,59);
+
+        $inputs = Input::where('created_at','>=', $date1)
+            ->where('created_at','<=', $date2)
+            ->get();
+
+        return $inputs;
+    }
+
 }
